@@ -1,0 +1,9 @@
+---
+custom_card_nwootton_evohome_thermostat_language_variables:
+  variables:
+    custom_card_nwootton_evohome_thermostat_off: "Off"
+    custom_card_nwootton_evohome_thermostat_on: "On"
+    custom_card_nwootton_evohome_thermostat_heat: "Heat"
+    custom_card_nwootton_evohome_thermostat_temp: "Temporary"
+    custom_card_nwootton_evohome_thermostat_perm: "Permanent"
+    custom_card_nwootton_evohome_thermostat_none: "None"
