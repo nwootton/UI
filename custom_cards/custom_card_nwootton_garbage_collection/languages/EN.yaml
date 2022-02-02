@@ -1,0 +1,7 @@
+custom_card_nwootton_garbage_collection_language_variables:
+  variables:
+    custom_card_nwootton_garbage_collection_today: "Today"
+    custom_card_nwootton_garbage_collection_tomorrow: "Tomorrow"
+    custom_card_nwootton_garbage_collection_later: "Later"
+    custom_card_nwootton_garbage_collection_days: "days"
+    custom_card_nwootton_garbage_collection_day: "day"

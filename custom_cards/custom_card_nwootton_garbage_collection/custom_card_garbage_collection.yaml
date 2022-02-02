@@ -1,0 +1,84 @@
+---
+### Garbage Collection Card for use with https://github.com/bruxy70/Garbage-Collection ###
+custom_card_nwootton_garbage_collection:
+  template:
+    - "icon_info_bg"
+    - "ulm_language_variables"
+    - "custom_card_nwootton_garbage_collection_language_variables"
+  label: >
+    [[[ return entity.attributes.friendly_name]]]
+  name: >
+    [[[
+      var myName = "";
+
+      if (variables.ulm_card_uses_verbose) {
+        myName = entity.state;
+      }
+      else {
+        if ( parseInt(entity.attributes.days) == 0) {
+          myName = variables.custom_card_nwootton_garbage_collection_today;
+        } else if ( parseInt(entity.attributes.days) == 1) {
+          myName = variables.custom_card_nwootton_garbage_collection_tomorrow;
+        } else {
+          myName = entity.attributes.days + " " + variables.custom_card_nwootton_garbage_collection_days;
+        }
+      }
+      return myName;
+    ]]]
+  icon: >
+    [[[
+      var myIcon = "";
+      if (parseInt(entity.attributes.days) == 0) {
+        myIcon = "mdi:numeric-0-circle-outline";
+      } else if (parseInt(entity.attributes.days) == 1) {
+        myIcon = "mdi:numeric-1-circle-outline";
+      } else if (parseInt(entity.attributes.days) == 2) {
+        myIcon = "mdi:numeric-2-circle-outline";
+      } else {
+        myIcon = "mdi:calendar-blank";
+      }
+      return myIcon;
+    ]]]
+  styles:
+    icon:
+      - color: "rgba(var(--color-theme),0.9)"
+    label:
+      - align-self: "end"
+      - justify-self: "start"
+      - font-weight: "bold"
+      - font-size: "14px"
+      - margin-left: "12px"
+      - filter: "opacity(100%)"
+    name:
+      - justify-self: "start"
+      - align-self: "start"
+      - font-weight: "bolder"
+      - font-size: "12px"
+      - filter: "opacity(40%)"
+      - margin-left: "12px"
+    grid:
+      - grid-template-areas: "'i l' 'i n'"
+      - grid-template-columns: "min-content auto"
+      - grid-template-rows: "min-content min-content"
+  state:
+    - operator: "template"
+      value: "[[[return parseInt(entity.attributes.days) == 0 ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-red),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-red),0.2)"
+    - operator: "template"
+      value: "[[[return parseInt(entity.attributes.days) == 1 ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-green),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-green),0.2)"
+    - operator: "template"
+      value: "[[[return parseInt(entity.attributes.days) <= 6 ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-blue),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-blue),0.2)"
