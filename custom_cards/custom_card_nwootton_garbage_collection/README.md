@@ -10,11 +10,19 @@ hide:
 
 The `custom_card_nwootton_garbage_collection` allows you to display a single entry per configured collection. Includes either the full verbose output or the simpleified `today`, `tomorrow` or in `X days` depending on configuration.
 
+![image info](./Simple_Mode.png)
+
+Simple mode shows the number of days until collection day.
+
+![image info](./Verbose_Mode.png)
+
+Verbose mode shows the date and days until collection.
+
 Icon changes colour and style based on time to collection - red 0 for today, green 1 for tomorrow and blue calendar for further in the future.
 
 ## Credits
 
-Author: nwootton - 2021
+Author: nwootton - 2022
 Version: 0.0.1
 
 Code is based on the `card_generic` that comes with UI-Minimalist platform theme.
