@@ -30,11 +30,11 @@ Now you can configure the Integration, you can do this also after it's installed
 
     Currently, it may happen that themes are not automatically selected correctly for you in all cases automatically. Please make sure that the minimalist theme is correctly selected in your Home Assistant settings (click on your profile picture in Home Assistant, bottom left).
 
-- Theme path: Make sure this is set to the same path as is configured in your `configuration.yaml` (default: `/themes`)
+- Theme path: Make sure this is set to the same path as is configured in your `configuration.yaml` (default: `themes/`)
 
 !!! note ""
 
-    Please make sure that you have included this themes folder in your `configuration.yaml` in the [frontend settings](https://www.home-assistant.io/integrations/frontend/). Unfortunately, this is something that the HACS integration cannot do for you. If you use the /themes folder, your entry in `configuration.yaml` must look like this for example:
+    Please make sure that you have included this themes/ folder in your `configuration.yaml` in the [frontend settings](https://www.home-assistant.io/integrations/frontend/). Unfortunately, this is something that the HACS integration cannot do for you. If you use the themes/ folder, your entry in `configuration.yaml` must look like this for example:
 
     ```yaml
     frontend:
@@ -55,6 +55,8 @@ Now you can configure the Integration, you can do this also after it's installed
 | [`mini-media-player`](https://github.com/kalkih/mini-media-player)      |
 | [`my-cards-slider-card`](https://github.com/AnthonMS/my-cards)          |
 | [`light-entity-card`](https://github.com/ljmerza/light-entity-card)     |
+| [`auto-entities`](https://github.com/thomasloven/lovelace-auto-entities)|
+| [`simple-weather-card`](https://github.com/kalkih/simple-weather-card)  |
 
 Hit submit and in the Sidebar a new Dashboard entry should appear.
 A new file for the dashboard configuration, with a small example, where you can generate your own layout should have been created under that location:
@@ -62,10 +64,9 @@ A new file for the dashboard configuration, with a small example, where you can 
 ```yaml
 config
 └── ui_lovelace_minimalist
-├── config
-├── custom_cards
-└── dashboard
-└── ui-lovelace.yaml
+    ├── custom_cards
+    └── dashboard
+        └── ui-lovelace.yaml
 ```
 
 In case you want to use your own ui-lovelace files go to [Configuration](../configuration).
