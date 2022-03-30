@@ -1,0 +1,4 @@
+custom_card_nwootton_isp_status_language_variables:
+  variables:
+    custom_card_nwootton_isp_status_online: "Online"
+    custom_card_nwootton_isp_status_offline: "Offline"
