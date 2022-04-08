@@ -1,5 +1,10 @@
 ---
+---
 title: custom_card_nwootton_moon_phase
+hide:
+  - toc
+---
+<!-- markdownlint-disable MD046 -->
 
 # Custom-card "ISP Status"
 
