@@ -1,4 +1,4 @@
-# Custom-card "ISP Status"
+# Custom-card "Moon Phase"
 
 The `custom_card_nwootton_moon_phase` allows you to display a simple translation of the moon phases in the local language.
 
