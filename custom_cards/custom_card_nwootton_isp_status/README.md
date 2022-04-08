@@ -12,6 +12,8 @@ The `custom_card_nwootton_isp_status` allows you to display a simple Online, Off
 
 Icon changes colour and style based on state - red for offline, green for online.
 
+Includes translations for DE and ES, but don't shoot the messenger, I used Google Translate, so feel free to correct.
+
 ## Credits
 
 Author: nwootton - 2022
@@ -38,7 +40,7 @@ Initial release
 
 ## Requirements
 
-NOne specifically as lomng as your integration returns the online/offline states. I use it with the pfSense integration
+None specifically as long as your integration returns the online/offline states. I use it with the pfSense integration
 
 ## Variables
 
