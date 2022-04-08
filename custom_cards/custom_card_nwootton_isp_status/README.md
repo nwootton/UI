@@ -1,10 +1,3 @@
----
-title: custom_card_nwootton_isp_status
-hide:
-  - toc
----
-<!-- markdownlint-disable MD046 -->
-
 # Custom-card "ISP Status"
 
 The `custom_card_nwootton_isp_status` allows you to display a simple Online, OffLine or native state for the ISP data.
