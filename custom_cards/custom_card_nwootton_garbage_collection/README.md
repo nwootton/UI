@@ -1,11 +1,3 @@
----
----
-title: custom_card_nwootton_garbage_collection
-hide:
-  - toc
----
-<!-- markdownlint-disable MD046 -->
-
 # Custom-card "Garbage Collection"
 
 The `custom_card_nwootton_garbage_collection` allows you to display a single entry per configured collection. Includes either the full verbose output or the simpleified `today`, `tomorrow` or in `X days` depending on configuration.
