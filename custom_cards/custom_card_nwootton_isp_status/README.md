@@ -1,10 +1,5 @@
 ---
----
 title: custom_card_nwootton_isp_status
-hide:
-  - toc
----
-<!-- markdownlint-disable MD046 -->
 
 # Custom-card "ISP Status"
 

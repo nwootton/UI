@@ -1,10 +1,5 @@
 ---
----
 title: custom_card_nwootton_moon_phase
-hide:
-  - toc
----
-<!-- markdownlint-disable MD046 -->
 
 # Custom-card "ISP Status"
 
@@ -60,80 +55,30 @@ Requires the Moon integration to be installed
 
 ```yaml
 ---
-custom_card_nwootton_isp_status:
+custom_card_nwootton_moon_phase:
   template:
     - "icon_info_bg"
     - "ulm_language_variables"
-    - "custom_card_nwootton_isp_status_language_variables"
-  label:  >
+    - "custom_card_nwootton_moon_phase_language_variables"
+  name:  >
     [[[
       var myName = "";
 
-      if ( entity.state == 'online') {
-        myName = variables.custom_card_nwootton_isp_status_online;
-      } else if ( entity.state == 'offline') {
-        myName = variables.custom_card_nwootton_isp_status_offline;
+      if ( entity.state == 'new_moon') {
+        myName = variables.custom_card_nwootton_moon_phase_new_moon;
+      } else if ( entity.state == 'waxing_crescent') {
+        myName = variables.custom_card_nwootton_moon_phase_waxing_crescent;
+      } else if ( entity.state == 'full_moon') {
+        myName = variables.custom_card_nwootton_moon_phase_full_moon;
+      } else if ( entity.state == 'waning_crescent') {
+        myName = variables.custom_card_nwootton_moon_phase_waning_crescent;
       } else {
         myName = entity.state;
       }
-
       return myName;
     ]]]
-  name: >
+  label: >
     [[[ return entity.attributes.friendly_name]]]
-  icon: |
-    [[[
-      if (entity.state == 'online') {
-        return 'mdi:lan-connect';
-      } else if (entity.state == 'offline') {
-        return 'mdi:lan-disconnect';
-      } else {
-        return 'mdi:lan-pending';
-      }
-    ]]]
-  styles:
-    icon:
-      - color: "rgba(var(--color-theme),0.9)"
-    label:
-      - justify-self: "start"
-      - align-self: "start"
-      - font-weight: "bolder"
-      - font-size: "12px"
-      - filter: "opacity(40%)"
-      - margin-left: "12px"
-    name:
-      - align-self: "end"
-      - justify-self: "start"
-      - font-weight: "bold"
-      - font-size: "14px"
-      - margin-left: "12px"
-      - filter: "opacity(100%)"
-    grid:
-      - grid-template-areas: "'i n' 'i l'"
-      - grid-template-columns: "min-content auto"
-      - grid-template-rows: "min-content min-content"
-  state:
-    - operator: template
-      value: >
-        [[[
-          return entity.state == 'online';
-        ]]]
-      styles:
-        icon:
-          - color: 'rgba(var(--color-green),1)'
-        img_cell:
-          - background-color: 'rgba(var(--color-green),0.2)'
-
-    - operator: template
-      value: >
-        [[[
-          return entity.state == 'offline';
-        ]]]
-      styles:
-        icon:
-          - color: 'rgba(var(--color-red),1)'
-        img_cell:
-          - background-color: 'rgba(var(--color-red),0.2)'
 
 
 ```
