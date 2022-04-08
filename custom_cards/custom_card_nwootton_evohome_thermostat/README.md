@@ -1,10 +1,3 @@
----
-title: custom_card_nwootton_evohome_thermostat
-hide:
-  - toc
----
-<!-- markdownlint-disable MD046 -->
-
 # Custom-card "Honeywell EvoHome Thermostat (EU)"
 
 The `custom_card_nwootton_evohome_thermostat` allows you to display a single entry per Zone as configured. There are 2 templates: `custom_card_garbage_collection_with_buttons` and `custom_card_garbage_collection_with_buttons_and_control`.
