@@ -2,5 +2,5 @@ custom_card_nwootton_moon_phase_language_variables:
   variables:
     custom_card_nwootton_moon_phase_new_moon: "Neumond"
     custom_card_nwootton_moon_phase_waxing_crescent: "Zunehmender Mond"
-    custom_card_nwootton_moon_phase_waning_gibbous: "Abnehmender Mond"
+    custom_card_nwootton_moon_phase_waning_gibbous: "schwindender Gibbous"
     custom_card_nwootton_moon_phase_full_moon: "Vollmond"

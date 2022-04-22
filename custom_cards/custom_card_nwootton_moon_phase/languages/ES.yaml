@@ -2,5 +2,5 @@ custom_card_nwootton_moon_phase_language_variables:
   variables:
     custom_card_nwootton_moon_phase_new_moon: "Luna nueva"
     custom_card_nwootton_moon_phase_waxing_crescent: "Luna creciente"
-    custom_card_nwootton_moon_phase_waning_gibbous: "Creciente menguante"
+    custom_card_nwootton_moon_phase_waning_gibbous: "Gibosa menguante"
     custom_card_nwootton_moon_phase_full_moon: "Luna llena"
