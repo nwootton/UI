@@ -13,8 +13,8 @@ custom_card_nwootton_moon_phase:
         myName = variables.custom_card_nwootton_moon_phase_waxing_crescent;
       } else if ( entity.state == 'full_moon') {
         myName = variables.custom_card_nwootton_moon_phase_full_moon;
-      } else if ( entity.state == 'waning_crescent') {
-        myName = variables.custom_card_nwootton_moon_phase_waning_crescent;
+      } else if ( entity.state == 'waning_gibbous') {
+        myName = variables.custom_card_nwootton_moon_phase_waning_gibbous;
       } else {
         myName = entity.state;
       }
