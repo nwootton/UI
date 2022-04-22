@@ -1,8 +1,96 @@
 ---
-card_welcome_scenes:
+title: Custom Card Welcome Navigation
+hide:
+  - toc
+---
+<!-- markdownlint-disable MD046 -->
+
+# Custom Card "Welcome Navigation"
+
+![example-image-light](../../assets/img/custom_card_esh_welcome_light.png)
+![example-image-dark](../../assets/img/custom_card_esh_welcome_dark.png)
+
+## Credits
+
+- Author: Everything Smart Home - 2022
+- Credits to the [welcome scenes card](https://ui-lovelace-minimalist.github.io/UI/usage/cards/card_welcome_scenes/) as the basis
+- Version: 1.0.0
+
+## Changelog
+
+<details>
+<summary>1.0.0</summary>
+Initial release
+</details>
+
+## Description
+
+This is a welcome card based on the [welcome scenes card](https://ui-lovelace-minimalist.github.io/UI/usage/cards/card_welcome_scenes/) but replaces the scenes for page navigation instead.
+
+## Variables
+
+| Variable | Default | Required         | Notes             |
+|----------|---------|------------------|-------------------|
+| ulm_card_esh_welcome_collapse  |         | No | Enables the collapse function. <br> requires an `input_boolean` to track the state|
+| ulm_weather   |         | Yes | This is your weather provider. <br> Example: `weather.your_provider`|
+| entity_  |     | Yes | Support almost all types of entities <br> Scenes do always show as off |
+| icon_  |    | Yes | The icon to show |
+| name_  |      | Yes | The name to show|
+| color_  |     | Yes | Color of the icon <br> Can choose between: `blue`, `red`, `green`, `yellow`, `pink`, `purple` <br> |
+| nav_  |      | Yes | The page/view to navigate to |
+
+## Collapse
+
+!!! note
+    This feature is fully optional. It requires some more manual configuration!
+You need to create a `input_boolean` in HA to track the state. See [Docs](https://www.home-assistant.io/integrations/input_boolean/).
+Furthermore, you need to add the `input_boolean` to the variable `ulm_card_esh_welcome_collapse` **and** to either the `entity` or `triggers_update` to make sure it directly refreshes the state.
+!!! warning
+    Do not use `triggers_update: "all"`! This will lead to unwanted behavior with the random colors generator.
+
+## Usage
+
+```yaml
+  - type: "custom:button-card"
+    template: "card_esh_welcome"
+    triggers_update: "input_boolean.welcome_toggle"
+    variables:
+      ulm_card_esh_welcome_collapse: input_boolean.welcome_toggle
+      ulm_weather: "weather.your_weather"
+      entity_1:
+        nav: "house"
+        icon: "mdi:home"
+        name: "House"
+        color: "blue"
+      entity_2:
+        nav: "lights"
+        icon: "mdi:lightbulb"
+        name: "Lights"
+        color: "yellow"
+      entity_3:
+        nav: "security"
+        icon: "mdi:shield"
+        name: Secure
+        color: "green"
+      entity_4:
+        nav: "network"
+        icon: "mdi:nas"
+        name: Lab
+        color: "purple"
+      entity_5:
+        nav: "network"
+        icon: "mdi:flask"
+        name: Lab
+        color: "red"
+```
+
+## Template code
+
+```yaml
+---
+card_esh_welcome:
   variables:
     ulm_weather: "[[[ return variables.ulm_weather]]]"
-    ulm_language: "[[[return window.navigator.language ]]]"
     entity_1:
       entity_id:
       icon: "[[[ return entity.attributes.icon ]]]"
@@ -62,10 +150,10 @@ card_welcome_scenes:
     grid:
       - grid-template-areas: >
           [[[
-            if(variables.ulm_card_welcome_scenes_collapse && states[variables.ulm_card_welcome_scenes_collapse].state == 'on'){
+            if(variables.ulm_card_esh_welcome_collapse && states[variables.ulm_card_esh_welcome_collapse].state == 'on'){
               return "\'item1\' \'item2\' ";
             } else {
-              return "\'item1\' \'item2\' \'item3\' \'item4\'";
+              return "\'item1\' \'item2\' \'item3\'";
             }
           ]]]
       - grid-template-columns: "1fr"
@@ -79,7 +167,7 @@ card_welcome_scenes:
       item3:
         - display: >
             [[[
-              if(variables.ulm_card_welcome_scenes_collapse && states[variables.ulm_card_welcome_scenes_collapse].state == 'on'){
+              if(variables.ulm_card_esh_welcome_collapse && states[variables.ulm_card_esh_welcome_collapse].state == 'on'){
                 return "none";
               } else {
                 return "block";
@@ -88,7 +176,7 @@ card_welcome_scenes:
       item4:
         - display: >
             [[[
-              if(variables.ulm_card_welcome_scenes_collapse && states[variables.ulm_card_welcome_scenes_collapse].state == 'on'){
+              if(variables.ulm_card_esh_welcome_collapse && states[variables.ulm_card_esh_welcome_collapse].state == 'on'){
                 return "none";
               } else {
                 return "block";
@@ -98,16 +186,16 @@ card_welcome_scenes:
     item1:
       card:
         type: "custom:button-card"
-        template: "card_topbar_welcome"
+        template: "card_esh_welcome_topbar"
         variables:
-          ulm_card_welcome_scenes_collapse: "[[[ return variables.ulm_card_welcome_scenes_collapse ]]]"
+          ulm_card_esh_welcome_collapse: "[[[ return variables.ulm_card_esh_welcome_collapse ]]]"
           ulm_weather: "[[[ return variables.ulm_weather]]]"
-          ulm_language: "[[[ return variables.ulm_language ]]]"
         styles:
           card:
             - border-radius: "none"
             - box-shadow: "none"
             - padding: "4px"
+            - margin-left: "relative"
     item2:
       card:
         type: "custom:button-card"
@@ -149,40 +237,10 @@ card_welcome_scenes:
     item3:
       card:
         type: "custom:button-card"
-        show_icon: true
-        show_label: true
-        show_name: true
-        show_entity_picture: false
-        name: "Scenes"
-        icon: "mdi:dots-vertical"
-        styles:
-          icon:
-            - height: "20px"
-            - filter: "opacity(50%)"
-          name:
-            - align-self: "start"
-            - justify-self: "start"
-            - font-weight: "bold"
-            - font-size: "18px"
-            - margin-left: "16px"
-          grid:
-            - grid-template-areas: "'n i'"
-            - grid-template-columns: "6fr 1fr"
-            - grid-template-rows: "min-content min-content"
-            - text-align: "start"
-          card:
-            - box-shadow: "none"
-            - padding-bottom: "0px"
-            - bottom: "10px"
-    item4:
-      card:
-        type: "custom:button-card"
         template: >
           [[[
-            if(variables.entity_1.entity_id && variables.entity_2.entity_id && variables.entity_3.entity_id && variables.entity_4.entity_id && variables.entity_5.entity_id){
-              return 'card_scenes_welcome'
-            } else {
-              return 'card_scenes_welcome_auto'
+            if(variables.entity_1.nav && variables.entity_2.nav && variables.entity_3.nav && variables.entity_4.nav && variables.entity_5.nav){
+              return 'card_esh_welcome_nav'
             }
           ]]]
         styles:
@@ -196,7 +254,8 @@ card_welcome_scenes:
           entity_3: "[[[ return variables.entity_3]]]"
           entity_4: "[[[ return variables.entity_4]]]"
           entity_5: "[[[ return variables.entity_5]]]"
-card_title_welcome:
+
+card_esh_welcome_title:
   tap_action:
     action: "none"
   show_icon: false
@@ -224,7 +283,8 @@ card_title_welcome:
       - font-weight: "bold"
       - font-size: "1rem"
       - opacity: "0.4"
-card_scenes_welcome:
+
+card_esh_welcome_nav:
   show_icon: false
   show_name: true
   show_label: false
@@ -243,14 +303,14 @@ card_scenes_welcome:
     item1:
       card:
         type: "custom:button-card"
-        template: "card_scenes_pill_welcome"
-        entity: "[[[ return variables.entity_1.entity_id ]]]"
+        template: "card_esh_welcome_pill_nav"
         custom_fields:
           item1:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_1.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_1.nav; ]]]"
               icon: "[[[ return variables.entity_1.icon ]]]"
               styles:
                 icon:
@@ -260,20 +320,22 @@ card_scenes_welcome:
           item2:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_1.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_1.nav; ]]]"
               name: "[[[ return variables.entity_1.name ]]]"
     item2:
       card:
         type: "custom:button-card"
-        template: "card_scenes_pill_welcome"
+        template: "card_esh_welcome_pill_nav"
         entity: "[[[ return variables.entity_2.entity_id ]]]"
         custom_fields:
           item1:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_2.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_2.nav; ]]]"
               icon: "[[[ return variables.entity_2.icon ]]]"
               styles:
                 icon:
@@ -283,20 +345,22 @@ card_scenes_welcome:
           item2:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_2.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_2.nav; ]]]"
               name: "[[[ return variables.entity_2.name ]]]"
     item3:
       card:
         type: "custom:button-card"
-        template: "card_scenes_pill_welcome"
+        template: "card_esh_welcome_pill_nav"
         entity: "[[[ return variables.entity_3.entity_id ]]]"
         custom_fields:
           item1:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_3.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_3.nav; ]]]"
               icon: "[[[ return variables.entity_3.icon ]]]"
               styles:
                 icon:
@@ -306,20 +370,22 @@ card_scenes_welcome:
           item2:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_3.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_3.nav; ]]]"
               name: "[[[ return variables.entity_3.name ]]]"
     item4:
       card:
         type: "custom:button-card"
-        template: "card_scenes_pill_welcome"
+        template: "card_esh_welcome_pill_nav"
         entity: "[[[ return variables.entity_4.entity_id ]]]"
         custom_fields:
           item1:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_4.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_4.nav; ]]]"
               icon: "[[[ return variables.entity_4.icon ]]]"
               styles:
                 icon:
@@ -329,20 +395,21 @@ card_scenes_welcome:
           item2:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_4.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_4.nav; ]]]"
               name: "[[[ return variables.entity_4.name ]]]"
     item5:
       card:
         type: "custom:button-card"
-        template: "card_scenes_pill_welcome"
-        entity: "[[[ return variables.entity_5.entity_id ]]]"
+        template: "card_esh_welcome_pill_nav"
         custom_fields:
           item1:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_5.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_5.nav; ]]]"
               icon: "[[[ return variables.entity_5.icon ]]]"
               styles:
                 icon:
@@ -352,19 +419,17 @@ card_scenes_welcome:
           item2:
             card:
               type: "custom:button-card"
-              template: "tap_action"
-              entity: "[[[ return variables.entity_5.entity_id ]]]"
+              tap_action:
+                action: "navigate"
+                navigation_path: "[[[ return variables.entity_1.nav; ]]]"
               name: "[[[ return variables.entity_5.name ]]]"
-card_scenes_pill_welcome:
+
+card_esh_welcome_pill_nav:
   show_icon: false
   show_label: false
   show_name: false
   state:
-    - operator: "template"
-      value: >
-        [[[
-          return (entity.state !== 'on' && entity.state !== 'playing')
-        ]]]
+    - value: "on"
       styles:
         card:
           - overflow: "visible"
@@ -414,11 +479,7 @@ card_scenes_pill_welcome:
             - border-radius: "50px"
             - padding: "5px"
         state:
-          - operator: "template"
-            value: >
-              [[[
-                return (entity.state !== 'on' && entity.state !== 'playing')
-              ]]]
+          - value: "on"
             styles:
               card:
                 - overflow: "visible"
@@ -448,26 +509,27 @@ card_scenes_pill_welcome:
             - padding: "0px 5px 5px 5px"
             - margin-top: "-5px"
             - border-radius: "50px"
-card_topbar_welcome:
+
+card_esh_welcome_topbar:
   show_icon: false
-  show_name: false
+  show_name: true
   show_label: false
   styles:
     grid:
-      - grid-template-areas: "item1 item2 item3"
-      - justify-content: "space-between"
-      - display: "flex"
+      - grid-template-areas: "'item1 item2 item3'"
+      - grid-template-columns: "1fr 7fr 1fr"
+      - grid-template-rows: "min-content"
+      - justify-items: "center"
     card:
-      - border-radius: "none"
-      - box-shadow: "none"
+      - border-radius: "var(--border-radius)"
+      - box-shadow: "var(--box-shadow)"
       - padding: "12px"
-      - background: "none"
   custom_fields:
     item1:
       card:
         type: "custom:button-card"
         template: "chips"
-        entity: "[[[ return variables.ulm_card_welcome_scenes_collapse ]]]"
+        entity: "[[[ return variables.ulm_card_esh_welcome_collapse ]]]"
         icon: "mdi:chevron-up"
         show_icon: true
         styles:
@@ -492,15 +554,15 @@ card_topbar_welcome:
           action: "call-service"
           service: "input_boolean.toggle"
           service_data:
-            entity_id: "[[[ return variables.ulm_card_welcome_scenes_collapse ]]]"
+            entity_id: "[[[ return variables.ulm_card_esh_welcome_collapse ]]]"
     item2:
       card:
         type: "custom:button-card"
         template: "chip_weather_date"
-        entity: "[[[ return variables.ulm_weather]]]"
         variables:
-          ulm_weather: "[[[ return variables.ulm_weather ]]]"
-          ulm_language: "[[[ return variables.ulm_language ]]]"
+          ulm_weather: "[[[ return variables.ulm_weather]]]"
+        tap_action:
+          action: "more-info"
         styles:
           card:
             - width: "100px"
@@ -532,211 +594,4 @@ card_topbar_welcome:
                     return "var(--box-shadow)";
                   }
                 ]]]
-# auto-entities
-card_scenes_welcome_auto:
-  show_icon: false
-  show_name: true
-  show_label: false
-  styles:
-    grid:
-      - grid-template-areas: "'item1 item2 item3 item4 item5'"
-      - grid-template-columns: "1fr 1fr 1fr 1fr 1fr"
-      - grid-template-rows: "min-content"
-      - justify-items: "center"
-      - column-gap: "24px"
-    card:
-      - border-radius: "var(--border-radius)"
-      - box-shadow: "var(--box-shadow)"
-      - padding: "12px"
-  custom_fields:
-    item1:
-      card:
-        type: "custom:auto-entities"
-        card:
-          type: "grid"
-          columns: 1
-          square: false
-        card_param: "cards"
-        sort:
-          count: 1
-        filter:
-          include:
-            - domain: "script"
-              options:
-                type: "custom:button-card"
-                template: "card_scenes_pill_welcome"
-                custom_fields:
-                  item1:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      icon: "[[[ return variables.entity_1.icon ]]]"
-                      styles:
-                        icon:
-                          - color: "[[[ return `rgba(var(--color-${variables.entity_1.color}), 1)`;]]]"
-                        img_cell:
-                          - background-color: "[[[ return `rgba(var(--color-${variables.entity_1.color}), 0.20)`;]]]"
-                  item2:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      name: "[[[ return variables.entity_1.name ]]]"
-    item2:
-      card:
-        type: "custom:auto-entities"
-        card:
-          type: "grid"
-          columns: 1
-          square: false
-        card_param: "cards"
-        sort:
-          count: 1
-          first: 1
-        filter:
-          include:
-            - domain: "script"
-              options:
-                type: "custom:button-card"
-                template: "card_scenes_pill_welcome"
-                custom_fields:
-                  item1:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      icon: "[[[ return variables.entity_2.icon ]]]"
-                      styles:
-                        icon:
-                          - color: "[[[ return `rgba(var(--color-${variables.entity_2.color}), 1)`;]]]"
-                        img_cell:
-                          - background-color: "[[[ return `rgba(var(--color-${variables.entity_2.color}), 0.20)`;]]]"
-                  item2:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      name: "[[[ return variables.entity_2.name ]]]"
-    item3:
-      card:
-        type: "custom:auto-entities"
-        card:
-          type: "grid"
-          columns: 1
-          square: false
-        card_param: "cards"
-        sort:
-          count: 1
-          first: 2
-        filter:
-          include:
-            - domain: "script"
-              options:
-                type: "custom:button-card"
-                template: "card_scenes_pill_welcome"
-                custom_fields:
-                  item1:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      icon: "[[[ return variables.entity_3.icon ]]]"
-                      styles:
-                        icon:
-                          - color: "[[[ return `rgba(var(--color-${variables.entity_3.color}), 1)`;]]]"
-                        img_cell:
-                          - background-color: "[[[ return `rgba(var(--color-${variables.entity_3.color}), 0.20)`;]]]"
-                  item2:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      name: "[[[ return variables.entity_3.name ]]]"
-    item4:
-      card:
-        type: "custom:auto-entities"
-        card:
-          type: "grid"
-          columns: 1
-          square: false
-        card_param: "cards"
-        sort:
-          count: 1
-          first: 3
-        filter:
-          include:
-            - domain: "script"
-              options:
-                type: "custom:button-card"
-                template: "card_scenes_pill_welcome"
-                custom_fields:
-                  item1:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      icon: "[[[ return variables.entity_4.icon ]]]"
-                      styles:
-                        icon:
-                          - color: "[[[ return `rgba(var(--color-${variables.entity_4.color}), 1)`;]]]"
-                        img_cell:
-                          - background-color: "[[[ return `rgba(var(--color-${variables.entity_4.color}), 0.20)`;]]]"
-                  item2:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      name: "[[[ return variables.entity_4.name ]]]"
-    item5:
-      card:
-        type: "custom:auto-entities"
-        card:
-          type: "grid"
-          columns: 1
-          square: false
-        card_param: "cards"
-        sort:
-          count: 1
-          first: 4
-        filter:
-          include:
-            - domain: "script"
-              options:
-                type: "custom:button-card"
-                template: "card_scenes_pill_welcome"
-                custom_fields:
-                  item1:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      icon: "[[[ return variables.entity_5.icon ]]]"
-                      styles:
-                        icon:
-                          - color: "[[[ return `rgba(var(--color-${variables.entity_5.color}), 1)`;]]]"
-                        img_cell:
-                          - background-color: "[[[ return `rgba(var(--color-${variables.entity_5.color}), 0.20)`;]]]"
-                  item2:
-                    card:
-                      type: "custom:button-card"
-                      template: "tap_action"
-                      entity: "this.entity_id"
-                      name: "[[[ return variables.entity_5.name ]]]"
-### tap_action
-tap_action:
-  tap_action:
-    action: "call-service"
-    service: >
-      [[[
-        if(entity.entity_id.startsWith("scene.")){
-          return "scene.turn_on"
-        }
-        else if(entity.entity_id.startsWith("media_player.")){
-          return "media_player.media_play_pause"
-        } else {
-          return "homeassistant.toggle"
-        }
-      ]]]
-    service_data:
-      entity_id: "[[[ return entity.entity_id]]]"
+```
