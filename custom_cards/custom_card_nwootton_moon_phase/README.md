@@ -63,19 +63,38 @@ custom_card_nwootton_moon_phase:
 
       if ( entity.state == 'new_moon') {
         myName = variables.custom_card_nwootton_moon_phase_new_moon;
+
       } else if ( entity.state == 'waxing_crescent') {
         myName = variables.custom_card_nwootton_moon_phase_waxing_crescent;
+
+      } else if ( entity.state == 'first_quarter') {
+        myName = variables.custom_card_nwootton_moon_phase_first_quarter;
+
+      } else if ( entity.state == 'waxing_gibbous') {
+        myName = variables.custom_card_nwootton_moon_phase_waxing_gibbous;
+
       } else if ( entity.state == 'full_moon') {
         myName = variables.custom_card_nwootton_moon_phase_full_moon;
+
       } else if ( entity.state == 'waning_gibbous') {
         myName = variables.custom_card_nwootton_moon_phase_waning_gibbous;
+
+      } else if ( entity.state == 'third_quarter') {
+        myName = variables.custom_card_nwootton_moon_phase_third_quarter;
+
+      } else if ( entity.state == 'waning_crescent') {
+        myName = variables.custom_card_nwootton_moon_phase_waning_crescent;
+
+      } else if ( entity.state == 'last_quarter') {
+        myName = variables.custom_card_nwootton_moon_phase_last_quarter;
+
       } else {
         myName = entity.state;
       }
+
       return myName;
     ]]]
   label: >
     [[[ return entity.attributes.friendly_name]]]
-
 
 ```
