@@ -1,6 +1,11 @@
 custom_card_nwootton_moon_phase_language_variables:
   variables:
-    custom_card_nwootton_moon_phase_new_moon: "New Moon"
-    custom_card_nwootton_moon_phase_waxing_crescent: "Waxing Crescent"
-    custom_card_nwootton_moon_phase_waning_gibbous: "Waning Crescent"
-    custom_card_nwootton_moon_phase_full_moon: "Full Moon"
+    custom_card_nwootton_moon_phase_new_moon: "New moon"
+    custom_card_nwootton_moon_phase_waxing_crescent: "Waxing crescent"
+    custom_card_nwootton_moon_phase_first_quarter: "First quarter"
+    custom_card_nwootton_moon_phase_waxing_gibbous: "Waxing gibbous"
+    custom_card_nwootton_moon_phase_full_moon: "Full moon"
+    custom_card_nwootton_moon_phase_waning_gibbous: "Waning gibbous"
+    custom_card_nwootton_moon_phase_third_quarter: "Third quarter"
+    custom_card_nwootton_moon_phase_waning_crescent: "Waning crescent"
+    custom_card_nwootton_moon_phase_last_quarter: "Last quarter"
