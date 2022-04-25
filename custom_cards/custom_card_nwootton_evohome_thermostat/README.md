@@ -1,12 +1,12 @@
 # Custom-card "Honeywell EvoHome Thermostat (EU)"
 
-The `custom_card_nwootton_evohome_thermostat` allows you to display a single entry per Zone as configured. There are 2 templates: `custom_card_garbage_collection_with_buttons` and `custom_card_garbage_collection_with_buttons_and_control`.
+The `custom_card_nwootton_evohome_thermostat` allows you to display a single entry per Zone as configured. 
 
 ![image info](./Examples.png)
 
-`custom_card_garbage_collection_with_buttons` allows for display of current zone name, with the measured current temperature displayed underneath. The second row displays the current zone set-point with the expected increase and decrease set-point (+ & -) buttons on either side. A single tap on either button will alter the set-point by 0.5 degrees.
+`custom_card_nwootton_evohome_thermostat_with_buttons` allows for display of current zone name, with the measured current temperature displayed underneath. The second row displays the current zone set-point with the expected increase and decrease set-point (+ & -) buttons on either side. A single tap on either button will alter the set-point by 0.5 degrees.
 
-`custom_card_garbage_collection_with_buttons_and_control` is a second template that adds a button to the top row that can be used to toggle an input_boolean entity. This is labelled as a 'boost' capability and was designed to allow for boosting the heating in a specific zone for a fixed duration.
+`custom_card_nwootton_evohome_thermostat_with_buttons_and_control` is a second template that adds a button to the top row that can be used to toggle an input_boolean entity. This is labelled as a 'boost' capability and was designed to allow for boosting the heating in a specific zone for a fixed duration.
 
 Icon will change to red if preset is either *temporary* or *permanent*. Green if preset is *none*, grey if preset is *off*.
 
