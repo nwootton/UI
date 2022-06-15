@@ -96,5 +96,6 @@ custom_card_nwootton_moon_phase:
     ]]]
   label: >
     [[[ return entity.attributes.friendly_name]]]
+    
 
 ```
