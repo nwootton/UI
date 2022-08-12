@@ -1,0 +1,43 @@
+custom_card_nwootton_dryer:
+  template:
+    - "icon_info_bg"
+    - ulm_language_variables
+    - custom_card_nwootton_dryer_language_variables
+  triggers_update: "all"
+  variables:
+    display_name: null
+    display_icon: null
+    display_runtime: null
+    display_status: null
+  tap_action:
+    action: more-info
+  hold_action:
+    action: more-info
+
+  name: >
+    [[[
+        if (variables.display_name == null) {
+          return variables.entity;
+        }
+        return variables.display_name;
+    ]]]
+
+  label: >
+    [[[
+        let status = states[variables.display_status].state
+        let runtime = states[variables.display_runtime].state
+
+        if (status == 'Standby') {
+          return variables.custom_card_nwootton_dryer_off;
+        }
+        return variables.custom_card_nwootton_dryer_time + runtime;
+    ]]]
+
+  icon: >
+    [[[
+        if (variables.display_icon == null) {
+          return variables.entity;
+        }
+        return variables.display_icon;
+    ]]]
+

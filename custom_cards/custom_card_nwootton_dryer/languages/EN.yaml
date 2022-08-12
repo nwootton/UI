@@ -1,0 +1,5 @@
+custom_card_nwootton_dryer_language_variables:
+  variables:
+    custom_card_nwootton_dryer_off: "Standby"
+    custom_card_nwootton_dryer_on: "Running"
+    custom_card_nwootton_dryer_time: "Running for: "
