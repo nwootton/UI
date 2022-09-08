@@ -41,3 +41,11 @@ custom_card_nwootton_dryer:
         return variables.display_icon;
     ]]]
 
+  state:
+    - operator: "template"
+      value: "[[[return states[variables.display_status].state == 'Running' ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-green),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-green),0.2)"
