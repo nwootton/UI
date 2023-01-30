@@ -1,0 +1,5 @@
+custom_card_nwootton_garbage_calendar_language_variables:
+  variables:
+    custom_card_nwootton_garbage_calendar_today: "due today"
+    custom_card_nwootton_garbage_calendar_tomorrow: "due tomorrow"
+    custom_card_nwootton_garbage_calendar_later: "due soon"

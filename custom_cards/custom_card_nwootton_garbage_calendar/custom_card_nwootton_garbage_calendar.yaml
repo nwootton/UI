@@ -1,0 +1,96 @@
+---
+### Garbage Collection Card for use with HA Local Calendar ###
+custom_card_nwootton_garbage_calendar:
+  template:
+    - "icon_info_bg"
+    - "ulm_language_variables"
+    - "custom_card_nwootton_garbage_calendar_language_variables"
+  trigger_update: "all"
+  variables:
+    display_hours: null
+
+  # Top text
+  name: >
+    [[[
+        return entity.attributes.friendly_name;
+    ]]]
+
+  # Bottom text
+  label: >
+    [[[
+        var myLabel = "";
+        var myHours = parseInt(states[variables.display_hours].state);
+        var myLabel = entity.attributes.message;
+
+        if (myHours <= 6) {
+          myLabel = myLabel + ' ' + variables.custom_card_nwootton_garbage_calendar_today;
+        } else if (myHours <= 24) {
+          myLabel = myLabel + ' ' + variables.custom_card_nwootton_garbage_calendar_tomorrow;
+        } else {
+          myLabel = myLabel + ' ' + variables.custom_card_nwootton_garbage_calendar_later;
+        }
+
+        return myLabel ;
+    ]]]
+
+  icon: >
+    [[[
+      var myIcon = "";
+      var myHours = parseInt(states[variables.display_hours].state);
+
+      if (myHours <= 6) {
+        myIcon = "mdi:numeric-0-circle-outline";
+      } else if (myHours <= 24) {
+        myIcon = "mdi:numeric-1-circle-outline";
+      } else if (myHours <= 48) {
+        myIcon = "mdi:numeric-2-circle-outline";
+      } else {
+        myIcon = "mdi:calendar-blank";
+      }
+      return myIcon;
+    ]]]
+
+  styles:
+    icon:
+      - color: "rgba(var(--color-theme),0.9)"
+    label:
+      - align-self: "end"
+      - justify-self: "start"
+      - font-weight: "bold"
+      - font-size: "14px"
+      - margin-left: "12px"
+      - filter: "opacity(100%)"
+    name:
+      - justify-self: "start"
+      - align-self: "start"
+      - font-weight: "bolder"
+      - font-size: "12px"
+      - filter: "opacity(40%)"
+      - margin-left: "12px"
+    grid:
+      - grid-template-areas: "'i l' 'i n'"
+      - grid-template-columns: "min-content auto"
+      - grid-template-rows: "min-content min-content"
+
+  state:
+    - operator: "template"
+      value: "[[[return parseInt(states[variables.display_hours].state) <= 6 ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-red),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-red),0.2)"
+    - operator: "template"
+      value: "[[[return parseInt(states[variables.display_hours].state) <= 24 ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-green),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-green),0.2)"
+    - operator: "template"
+      value: "[[[return parseInt(states[variables.display_hours].state) <= 48 ]]]"
+      styles:
+        icon:
+          - color: "rgba(var(--color-blue),1)"
+        img_cell:
+          - background-color: "rgba(var(--color-blue),0.2)"
