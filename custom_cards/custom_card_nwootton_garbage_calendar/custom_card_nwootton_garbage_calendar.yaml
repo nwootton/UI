@@ -22,7 +22,9 @@ custom_card_nwootton_garbage_calendar:
         var myHours = parseInt(states[variables.display_hours].state);
         var myLabel = entity.attributes.message;
 
-        if (myHours <= 6) {
+        if (myHours <= 0) {
+          myLabel = myLabel + ' ' + variables.custom_card_nwootton_garbage_calendar_later;
+        } else if (myHours <= 6) {
           myLabel = myLabel + ' ' + variables.custom_card_nwootton_garbage_calendar_today;
         } else if (myHours <= 24) {
           myLabel = myLabel + ' ' + variables.custom_card_nwootton_garbage_calendar_tomorrow;
@@ -38,7 +40,9 @@ custom_card_nwootton_garbage_calendar:
       var myIcon = "";
       var myHours = parseInt(states[variables.display_hours].state);
 
-      if (myHours <= 6) {
+      if (myHours <= 0 ) {
+        myIcon = "mdi:calendar-blank";
+      } else if (myHours <= 6) {
         myIcon = "mdi:numeric-0-circle-outline";
       } else if (myHours <= 24) {
         myIcon = "mdi:numeric-1-circle-outline";
@@ -73,6 +77,8 @@ custom_card_nwootton_garbage_calendar:
       - grid-template-rows: "min-content min-content"
 
   state:
+    - operator: "template"
+      value: "[[[return parseInt(states[variables.display_hours].state) <= 0 ]]]"
     - operator: "template"
       value: "[[[return parseInt(states[variables.display_hours].state) <= 6 ]]]"
       styles:
